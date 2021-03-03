@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 void main() => runApp(MaterialApp(
     home: Home()
 ));
@@ -23,9 +22,10 @@ class _HomeState extends State<Home> {
   late Future<List<Forfait>> futurForfaits;
   // Mock
   // forfaits = [];
+
   initState() {
-    super.initState();
     futurForfaits = _fetchForfaits();
+    super.initState();
     // Mock
     // Iterable list = json.decode('[{"_id":"6000ff360efa3fd999621bed","destination":"Jamaïque","villeDepart":"Montreal", "hotel":{"nom":"Hotel #6","coordonnees":"...","nombreEtoiles":3,"nombreChambres":1,"caracteristiques":["Face à la plage","Miniclub"]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":300,"rabais":0,"vedette":true,"image" : "", "da":"0000000"},{"_id":"6000ff370efa3fd999621c03","destination":"Alaska","villeDepart":"Montreal","hotel":{"nom":"Hotel #6","coordonnees":"...","nombreEtoiles":1,"nombreChambres":1,"caracteristiques":["Face à la plage","Miniclub"]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":300,"rabais":0,"vedette":true,"image" : "", "da":"0000000"},{"_id":"6000ff380efa3fd999621c19","destination":"Japon","villeDepart":"Montreal","hotel":{"nom":"Hotel #6","coordonnees":"...","nombreEtoiles":1,"nombreChambres":1,"caracteristiques":["Face à la plage","Miniclub"]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":300,"rabais":0,"vedette":true,"image" : "", "da":"0000000"},{"_id":"6000ff390efa3fd999621c2f","destination":"Cuba","villeDepart":"Montreal","hotel":{"nom":"Hotel #6","coordonnees":"...","nombreEtoiles":1,"nombreChambres":1,"caracteristiques":["Face à la plage","Miniclub"]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":300,"rabais":0,"vedette":false,"image" : "", "da":"0000000"},{"_id":"6000ff3a0efa3fd999621c45","destination":"Cuba","villeDepart":"Montreal","hotel":{"nom":"Hotel #7","coordonnees":"...","nombreEtoiles":2,"nombreChambres":20,"caracteristiques":[]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":3000,"rabais":0,"vedette":false,"image" : "", "da":"0000000"},{"_id":"6000ff3c0efa3fd999621c5b","destination":"Cuba","villeDepart":"Montreal","hotel":{"nom":"Hotel #8","coordonnees":"...","nombreEtoiles":3,"nombreChambres":300,"caracteristiques":["Face à la plage","Miniclub","..."]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":30000,"rabais":100,"vedette":false,"image" : "", "da":"0000000"},{"_id":"6000ff3e0efa3fd999621c71","destination":"Costa Rica","villeDepart":"Québec","hotel":{"nom":"Hotel #6","coordonnees":"...","nombreEtoiles":1,"nombreChambres":1,"caracteristiques":["Face à la plage","Miniclub"]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":300,"rabais":0,"vedette":false,"image" : "", "da":"0000000"},{"_id":"6000ff3f0efa3fd999621c87","destination":"Costa Rica","villeDepart":"Québec","hotel":{"nom":"Hotel #7","coordonnees":"...","nombreEtoiles":2,"nombreChambres":20,"caracteristiques":[]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":3000,"rabais":0,"vedette":false,"image" : "", "da":"0000000"},{"_id":"6000ff400efa3fd999621c9d","destination":"Costa Rica","villeDepart":"Québec","hotel":{"nom":"Hotel #8","coordonnees":"...","nombreEtoiles":3,"nombreChambres":300,"caracteristiques":["Face à la plage","Miniclub","..."]},"dateDepart":"2021-01-01","dateRetour":"2021-01-08","dateDepartD":"2020-01-01T00:00:00.000Z","dateRetourD":"2020-01-08T00:00:00.000Z","prix":30000,"rabais":100,"vedette":false,"image" : "", "da":"0000000"}]');
     // forfaits = list.map((model) => Forfait.fromJson(model)).toList();
@@ -129,8 +129,7 @@ class _HomeState extends State<Home> {
                                                       fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
-                                                  Text('Départ ' +
-                                                      (snapshot.data?[index].dateDepart.toString() ?? ''),
+                                                  Text('Du ',
                                                     style: TextStyle(
                                                       color: Colors.grey[300],
                                                       letterSpacing: 2.0,
@@ -139,8 +138,25 @@ class _HomeState extends State<Home> {
                                                       fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
-                                                  Text('Retour ' +
-                                                      (snapshot.data?[index].dateRetour.toString() ?? ''),
+                                                  Text(snapshot.data?[index].dateDepart.toString() ?? '',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[300],
+                                                      letterSpacing: 2.0,
+                                                      height: 1.5,
+                                                      fontSize: 15.0,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text('Au ',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[300],
+                                                      letterSpacing: 2.0,
+                                                      height: 1.5,
+                                                      fontSize: 15.0,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(snapshot.data?[index].dateRetour.toString() ?? '',
                                                     style: TextStyle(
                                                       color: Colors.grey[300],
                                                       letterSpacing: 2.0,
@@ -170,33 +186,21 @@ class _HomeState extends State<Home> {
                                                     children: <Widget>[
                                                       Column(
                                                         children: [
-                                                          // Row(
-                                                          //   mainAxisSize: MainAxisSize.min,
-                                                          //   children: List.generate(5, (index) {
-                                                          //     return Icon(
-                                                          //         snapshot.data?[index].hotel.nombreEtoiles ?? 0,
-                                                          //         ? Icons.star
-                                                          //         : Icons.star_border,
-                                                          //         color: Colors
-                                                          //             .amber[200]
-                                                          //     );
-                                                          //   }),
-                                                            // Row(
-                                                            //   mainAxisSize: MainAxisSize.min,
-                                                            //   children: List.generate(5, (index) {
-                                                            //     return Icon(index - 1 <=
-                                                            //         forfaits[index].hotel
-                                                            //             .nombreEtoiles
-                                                            //         ? Icons.star
-                                                            //         : Icons.star_border,
-                                                            //         color: Colors
-                                                            //             .amber[200]
-                                                            //     );
-                                                            //   }),
-                                                            // ),],
-                                                          // ),
-                                                    ],
-                                                      ),
+                                                            Row(
+                                                              mainAxisSize: MainAxisSize.min,
+                                                              children: List.generate(5, (index) {
+                                                                return Icon(index - 1 <=
+                                                                    (snapshot.data?[index].hotel.nombreEtoiles ?? 0)
+                                                                    ? Icons.star
+                                                                    : Icons.star_border,
+                                                                    color: Colors
+                                                                        .amber[200]
+                                                                );
+                                                              }),
+                                                            ),
+                                                          ],
+                                                          ),
+
                                                       Column(
                                                         children: [
                                                           Padding(
@@ -247,8 +251,15 @@ class _HomeState extends State<Home> {
                                                                   color: Colors
                                                                       .amber[200]),
                                                               SizedBox(height: 10.0),
-                                                              Text(
-                                                                (snapshot.data?[index].prix.toString() ?? '') + ' \$',
+
+                                                              Text('Prix',
+                                                                style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey[300],
+                                                                  letterSpacing: 2.0,
+                                                                ),
+                                                              ),
+                                                              Text(snapshot.data?[index].prix.toString() ?? ''+ ' \$',
                                                                 style: TextStyle(
 
                                                                   color: Colors
@@ -353,7 +364,7 @@ class Forfait {
   bool vedette;
   Hotel hotel;
 
-  Forfait({required this.id, required this.destination, required this.villeDepart, required this.hotel, required this.dateDepart, required this.dateRetour, required this.image, required this.prix, required this.rabais, required this.vedette});
+  Forfait({required this.id, required this.destination, required this.villeDepart, required this.dateDepart, required this.dateRetour, required this.hotel,  required this.image, required this.prix, required this.rabais, required this.vedette});
 
   factory Forfait.fromJson(Map<String, dynamic> json) {
     return Forfait(
@@ -373,19 +384,20 @@ class Forfait {
 }
 
 class Hotel {
-  String nom = '';
-  String coordonnees = '';
-  int nombreEtoiles = 0;
-  int nombreChambres = 0;
+ final String nom;
+ final String coordonnees;
+ final int nombreEtoiles;
+ final int nombreChambres;
 
 
-  Hotel({this.nom = '', this.coordonnees = '', this.nombreEtoiles = 0, this.nombreChambres = 0});
+  Hotel({required this.nom, required this.coordonnees, required this.nombreEtoiles, required this.nombreChambres});
 
   factory Hotel.fromJson(Map<String, dynamic> json) {
     return Hotel(
         nom:json['nom'],
         coordonnees:json['coordonnees'],
         nombreEtoiles: json['nombreEtoiles'],
+        nombreChambres: json['nombreChambres'],
     );
   }
 }
